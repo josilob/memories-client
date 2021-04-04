@@ -13,13 +13,14 @@ const Form = () => {
 	});
 	const classes = useStyles();
 	const handleSubmit = () => {};
+	const clear = () => {};
 
 	return (
 		<Paper className={classes.paper}>
 			<form
 				autoComplete='off'
 				noValidate
-				className={classes.form}
+				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}>
 				<Typography variant='h6'> Creating a Memory</Typography>
 				<TextField
@@ -70,7 +71,15 @@ const Form = () => {
 					size='large'
 					type='submit'
 					fullWidth>
-					Submits
+					Submit
+				</Button>
+				<Button
+					variant='contained'
+					color='secondary'
+					size='small'
+					onClick={clear}
+					fullWidth>
+					Clear
 				</Button>
 			</form>
 		</Paper>
