@@ -6,6 +6,8 @@ import { createPost } from '../../actions/posts';
 import { useDispatch } from 'react-redux';
 
 const Form = () => {
+	const classes = useStyles();
+
 	const [postData, setPostData] = useState({
 		creator: '',
 		title: '',
@@ -13,11 +15,11 @@ const Form = () => {
 		tags: '',
 		selectedFile: '',
 	});
-	const classes = useStyles();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(createPost(postData));
+		clear();
 	};
 
 	const clear = () => {};
