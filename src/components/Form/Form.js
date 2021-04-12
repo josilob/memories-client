@@ -8,9 +8,6 @@ import { useSelector } from 'react-redux';
 
 const Form = ({ currentId, setCurrentId }) => {
 	const classes = useStyles();
-	const post = useSelector((state) =>
-		currentId ? state.posts.find((post) => post._id === currentId) : null
-	);
 	const [postData, setPostData] = useState({
 		creator: '',
 		title: '',
@@ -18,6 +15,20 @@ const Form = ({ currentId, setCurrentId }) => {
 		tags: '',
 		selectedFile: '',
 	});
+	const post = useSelector((state) =>
+		currentId ? state.posts.find((post) => post._id === currentId) : null
+	);
+	const dispatch = useDispatch();
+	const clear = () => {
+		setCurrentId(0);
+		setPostData({
+			creator: '',
+			title: '',
+			message: '',
+			tags: '',
+			selectedFile: '',
+		});
+	};
 
 	useEffect(() => {
 		if (post) setPostData(post);
@@ -25,14 +36,15 @@ const Form = ({ currentId, setCurrentId }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (currentId) {
-			dispatch(updatePost(currentId, postData));
-		} else dispatch(createPost(postData));
-		clear();
-	};
 
-	const clear = () => {};
-	const dispatch = useDispatch();
+		if (currentId === 0) {
+			dispatch(createPost(postData));
+			clear();
+		} else {
+			dispatch(updatePost(currentId, postData));
+			clear();
+		}
+	};
 
 	return (
 		<Paper className={classes.paper}>
