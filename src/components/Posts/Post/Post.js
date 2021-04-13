@@ -1,4 +1,3 @@
-import { ExpansionPanelDetails } from '@material-ui/core';
 import React from 'react';
 import {
 	Card,
@@ -7,19 +6,19 @@ import {
 	CardMedia,
 	Button,
 	Typography,
-} from '@material-ui/core';
+} from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-import useStyles from './styles';
 import { useDispatch } from 'react-redux';
-import { deletePost, likePost } from '../../../actions/posts';
+
+import { likePost, deletePost } from '../../../actions/posts';
+import useStyles from './styles';
 
 const Post = ({ post, setCurrentId }) => {
-	const classes = useStyles();
 	const dispatch = useDispatch();
-	// console.log(post);
+	const classes = useStyles();
 
 	return (
 		<Card className={classes.card}>
@@ -31,12 +30,10 @@ const Post = ({ post, setCurrentId }) => {
 				}
 				title={post.title}
 			/>
-
 			<div className={classes.overlay}>
 				<Typography variant='h6'>{post.creator}</Typography>
 				<Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
 			</div>
-
 			<div className={classes.overlay2}>
 				<Button
 					style={{ color: 'white' }}
@@ -45,13 +42,11 @@ const Post = ({ post, setCurrentId }) => {
 					<MoreHorizIcon fontSize='default' />
 				</Button>
 			</div>
-
 			<div className={classes.details}>
 				<Typography variant='body2' color='textSecondary' component='h2'>
 					{post.tags.map((tag) => `#${tag} `)}
 				</Typography>
 			</div>
-
 			<Typography
 				className={classes.title}
 				gutterBottom
@@ -59,9 +54,8 @@ const Post = ({ post, setCurrentId }) => {
 				component='h2'>
 				{post.title}
 			</Typography>
-
 			<CardContent>
-				<Typography variant='h5' color='textSecondary' component='p'>
+				<Typography variant='body2' color='textSecondary' component='p'>
 					{post.message}
 				</Typography>
 			</CardContent>
@@ -71,7 +65,7 @@ const Post = ({ post, setCurrentId }) => {
 					size='small'
 					color='primary'
 					onClick={() => dispatch(likePost(post._id))}>
-					<ThumbUpAltIcon fontSize='small' /> Like {post.likeCount}
+					<ThumbUpAltIcon fontSize='small' /> Like {post.likeCount}{' '}
 				</Button>
 				<Button
 					size='small'
