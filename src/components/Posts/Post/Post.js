@@ -16,6 +16,7 @@ import useStyles from './styles';
 
 const Post = ({ post, setCurrentId }) => {
 	const classes = useStyles();
+	console.log(post);
 
 	return (
 		<Card className={classes.card}>
@@ -57,7 +58,7 @@ const Post = ({ post, setCurrentId }) => {
 			</Typography>
 
 			<CardContent>
-				<Typography variant='body2' color='textSecondary' component='p'>
+				<Typography variant='h5' color='textSecondary' component='p'>
 					{post.message}
 				</Typography>
 			</CardContent>
