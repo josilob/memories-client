@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Avatar,
 	Paper,
@@ -14,7 +14,11 @@ import useStyles from './styles';
 
 const Auth = () => {
 	const classes = useStyles();
+	const [showPassword, setShowPassword] = useState(false);
 	const isSignup = false;
+	const handleShowPassword = () => {
+		setShowPassword((prevShowPassword) => !prevShowPassword);
+	};
 	const handleSubmit = () => {};
 	const handleChange = () => {};
 
@@ -55,7 +59,8 @@ const Auth = () => {
 							name='password'
 							label='Password'
 							handleChange={handleChange}
-							type='password'
+							type={showPassword ? 'text' : 'password'}
+							handleShowPassword={handleShowPassword}
 						/>
 					</Grid>
 				</form>
