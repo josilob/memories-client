@@ -15,13 +15,17 @@ import useStyles from './styles';
 const Auth = () => {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
-	const isSignup = true;
+	const [isSignup, setIsSignup] = useState();
+	// const isSignup = true;
 	const handleShowPassword = () => {
 		setShowPassword((prevShowPassword) => !prevShowPassword);
 	};
 	const handleSubmit = () => {};
 	const handleChange = () => {};
-	const switchMode = () => {};
+	const switchMode = () => {
+		setIsSignup((prevIsSignup) => !prevIsSignup);
+		handleShowPassword(false);
+	};
 
 	return (
 		<Container component='main' maxWidth='xs'>
