@@ -7,6 +7,7 @@ import {
 	Typography,
 	Container,
 } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import LockOutlineIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
@@ -18,6 +19,7 @@ const Auth = () => {
 	const classes = useStyles();
 	const [showPassword, setShowPassword] = useState(false);
 	const [isSignup, setIsSignup] = useState();
+	const dispatch = useDispatch();
 	// const isSignup = true;
 	const handleShowPassword = () => {
 		setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -31,7 +33,13 @@ const Auth = () => {
 	};
 
 	const googleSuccess = async (res) => {
-		console.log(res);
+		const result = res?.profileObj;
+		const token = res?.tokenId;
+		try {
+			dispatch({ type: 'AUTH', data: { result, token } });
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const googleFailure = (error) => {
