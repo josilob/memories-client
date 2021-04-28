@@ -24,9 +24,18 @@ const Auth = () => {
 	};
 	const handleSubmit = () => {};
 	const handleChange = () => {};
+
 	const switchMode = () => {
 		setIsSignup((prevIsSignup) => !prevIsSignup);
 		handleShowPassword(false);
+	};
+
+	const googleSuccess = async (res) => {
+		console.log(res);
+	};
+
+	const googleFailure = () => {
+		console.log('Google Sign In was unsuccessful. Try again later.');
 	};
 
 	return (
@@ -78,8 +87,17 @@ const Auth = () => {
 							/>
 						)}
 					</Grid>
+					<Button
+						type='submit'
+						fullWidth
+						variant='contained'
+						color='primary'
+						className={classes.submit}>
+						{isSignup ? 'Sign Up' : 'Sign In'}
+					</Button>
+
 					<GoogleLogin
-						clientId='GOOGLE ID'
+						clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
 						render={(renderProps) => (
 							<Button
 								className={classes.googleButton}
@@ -92,15 +110,11 @@ const Auth = () => {
 								Google Sign In
 							</Button>
 						)}
+						onSuccess={googleSuccess}
+						onFailure={googleFailure}
+						cookiePolicy='single_host_origin'
 					/>
-					<Button
-						type='submit'
-						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}>
-						{isSignup ? 'Sign Up' : 'Sign In'}
-					</Button>
+
 					<Grid container justify='flex-end'>
 						<Grid item>
 							<Button onClick={switchMode}>
